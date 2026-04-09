@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  airflow:
+    image: apache/airflow:2.9.0
+    container_name: airflow_standalone
+    environment:
+      # Disable the default tutorials so your UI is clean
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      # Tell Airflow to install your Python packages when it boots up!
+      - _PIP_ADDITIONAL_REQUIREMENTS=pandas sqlalchemy psycopg2-binary
+      # Tell Airflow how to find your Postgres database
+      - DB_HOST=host.docker.internal
+    volumes:
+      # Link your local folders to the container
+      - ./dags:/opt/airflow/dags
+      - ./src:/opt/airflow/src
+      - ./config:/opt/airflow/config
+    ports:
+      - "8080:8080"
+    # 'standalone' spins up everything (scheduler, webserver, database) in one go
+    command: standalone

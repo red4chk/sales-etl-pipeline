@@ -1,0 +1,18 @@
+
+
+services:
+  data_warehouse:
+    image: postgres:15
+    container_name: sales_dwh
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: sales_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

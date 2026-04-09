@@ -1,0 +1,18 @@
+# Security
+config/.env
+.env
+
+# Virtual Environments
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Airflow Data & Logs
+logs/
+plugins/
+airflow.db
+airflow.cfg
+webserver_config.py
